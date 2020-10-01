@@ -3,6 +3,13 @@
 *.zip
 *.csv.gz
 
+# Shapefiles
+*.cpg
+*.dbf
+*.prj
+*.shp
+*.shx
+
 # MacOS file
 .DS_Store
 
