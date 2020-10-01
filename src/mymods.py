@@ -59,7 +59,8 @@ def model_summary(dataframe, target, list_of_features):
     
     
     '''
-    features_scaled = (dataframe[list_of_features] - np.mean(dataframe[list_of_features])) / np.std(dataframe[list_of_features])
-    predictors = sm.add_constant(features_scaled)
-    model = sm.OLS(dataframe[target], predictors).fit()
-    return model.summary()
+    #features_scaled = (dataframe[list_of_features] - np.mean(dataframe[list_of_features])) / np.std(dataframe[list_of_features])
+    #predictors = sm.add_constant(features_scaled)
+    global test_model
+    test_model = sm.OLS(dataframe[target], dataframe[list_of_features]).fit()
+    return test_model.summary()
