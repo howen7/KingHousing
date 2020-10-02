@@ -29,11 +29,6 @@ def correlation_info(dataframe, target, minimum_correlation):
     -------
     A list of features with correlation over the minimum_correlation and a heat map of the correlation between all the dataframe columns. 
     '''
-    corr = dataframe.corr();
-    mask = np.triu(np.ones_like(corr, dtype=np.bool));
-
-    fig1, ax1 = plt.subplots(figsize=(16, 12));
-    graph = sns.heatmap(corr, mask=mask, ax=ax1, cmap="viridis");
 
     correlation_index = dataframe.corr()[target].sort_values(ascending=False).index
     correlation = dataframe.corr()[target].sort_values(ascending=False)
@@ -42,7 +37,14 @@ def correlation_info(dataframe, target, minimum_correlation):
         if j > minimum_correlation:
             top_correlation.append(i)
     top_corr = top_correlation[1:]
-    return print(f'The top correlation features for you target it: {top_corr}'), graph
+    
+    corr = dataframe[top_correlation].corr();
+    mask = np.triu(np.ones_like(corr, dtype=np.bool));
+
+    fig1, ax1 = plt.subplots(figsize=(16, 12));
+    graph = sns.heatmap(corr, mask=mask, ax=ax1, cmap="viridis");
+    
+    return top_corr, graph
 
 
 def model_summary(dataframe, target, list_of_features):
@@ -63,4 +65,4 @@ def model_summary(dataframe, target, list_of_features):
     #predictors = sm.add_constant(features_scaled)
     global test_model
     test_model = sm.OLS(dataframe[target], dataframe[list_of_features]).fit()
-    return test_model.summary()
+    return test_model.summary(), test_model
