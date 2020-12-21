@@ -1,5 +1,5 @@
 # King County Housing predictions
-![Seattle_pic](/notebooks/report/figures/read_mepic.png)
+![Seattle_pic](/notebooks/report/figures/readmepic.png)
 
 # Table of Contents
 
